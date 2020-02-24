@@ -1,15 +1,53 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # animatrixr
 
-The goal of animatrixr is to support my blog post on animating matrix transformations.
+`animatrixr` is a toy package I created to support a [blog
+post](https://www.bryanshalloway.com/2020/02/24/animatrixr-visualizing-matrix-transformations-pt-2/)
+I wrote on exploring animating matrix transformations using `gganimate`.
+It allows you to stitch together and then animate matrix
+transformations. For example:
+
+``` r
+library(dplyr)
+library(animatrixr)
+
+rotate_90 <- animatrixr::rotation_matrix(pi/2)
+
+sheer_vertical <- tribble(~ x, ~ y,
+                      1, 0,
+                      0.5, 1) %>%
+  as.matrix()
+
+reflect_x <- tribble(~ x, ~ y,
+                      1, 0,
+                      0, -1) %>%
+  as.matrix() 
+
+add_transformation(m = rotate_90, seq_fun = animatrixr::seq_matrix_lp) %>% 
+  add_transformation(m = sheer_vertical) %>% 
+  add_transformation(m = reflect_x) %>% 
+  animate_matrix(datasaurus = TRUE)
+```
+
+<img src="man/figures/README-unnamed-chunk-1-1.gif" width="100%" />
+
+You can use `seq_fun` argument to specify the function used to
+explicitly define frames in-between the start and end of an animation of
+a matrix transformation.
+
+However, this is a *toy* package. No work has gone into setting-up
+tests, catching errors, considering potential users, etc. Also, many
+visualizations you might try to make may look unintuitive (or simply
+come-out incorrect) – especially involving rotations when starting
+outside of unit vectors.
 
 ## Installation
 
-You can install the released version of animatrixr from my github page:
+If you *still* want to check-it out, you can install it from from my
+github page:
 
 ``` r
 devtools::install_github("brshallo/animatrixr")
 ```
-
-## Warning
-
-This is a toy package for use in the aforementioned blog. I have no plans for actively mantaining it and am not suggesting others use it.

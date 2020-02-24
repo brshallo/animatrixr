@@ -1,6 +1,20 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 # animatrixr
 
-`animatrixr` is a toy package I created to support a blog post I wrote on exploring animating matrix transformations using `gganimate`. It allows you to stitch together and then animate matrix transformations. For example:
+`animatrixr` is a toy package I created to support a [blog post](https://www.bryanshalloway.com/2020/02/24/animatrixr-visualizing-matrix-transformations-pt-2/) I wrote on exploring animating matrix transformations using `gganimate`. It allows you to stitch together and then animate matrix transformations. For example:
 
 ```{r, message=FALSE, warning=FALSE}
 library(dplyr)
