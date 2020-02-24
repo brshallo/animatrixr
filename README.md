@@ -4,8 +4,9 @@
 # animatrixr
 
 `animatrixr` is a *toy* package that allows you to pipe together
-animations of matrix transformations. For example (rotate) –\> (sheer)
-–\> (reflect) –\> *ANIMATE*:
+animations of matrix transformations. For example:
+
+(rotate) –\> (sheer) –\> (reflect) –\> *ANIMATE*
 
 ``` r
 library(dplyr)
@@ -39,7 +40,11 @@ a matrix transformation.
 post](https://www.bryanshalloway.com/2020/02/24/animatrixr-visualizing-matrix-transformations-pt-2/)
 on exploring animating matrix transformations using `gganimate`. The
 blog post doubles as providing documentation on how `animatrixr` is
-set-up and some of its limitations.
+set-up and some of its limitations. I had also written an initial [blog
+post](https://www.bryanshalloway.com/2020/02/20/visualizing-matrix-transformations-with-gganimate/)
+the week prior on animating matrix transformations that contains further
+documentation on some of the functions that ultimately wound-up in
+`animatrixr`.
 
 No work has gone into setting-up tests, catching errors, considering
 potential users, etc. Also, many visualizations you might try to make
