@@ -3,11 +3,9 @@
 
 # animatrixr
 
-`animatrixr` is a toy package I created to support a [blog
-post](https://www.bryanshalloway.com/2020/02/24/animatrixr-visualizing-matrix-transformations-pt-2/)
-I wrote on exploring animating matrix transformations using `gganimate`.
-It allows you to stitch together and then animate matrix
-transformations. For example:
+`animatrixr` is a *toy* package that allows you to pipe together
+animations of matrix transformations. For example (rotate) –\> (sheer)
+–\> (reflect) –\> *ANIMATE*:
 
 ``` r
 library(dplyr)
@@ -37,16 +35,21 @@ You can use `seq_fun` argument to specify the function used to
 explicitly define frames in-between the start and end of an animation of
 a matrix transformation.
 
-However, this is a *toy* package. No work has gone into setting-up
-tests, catching errors, considering potential users, etc. Also, many
-visualizations you might try to make may look unintuitive (or simply
-come-out incorrect) – especially involving rotations when starting
-outside of unit vectors.
+`animatrixr` is a *toy* package I wrote (hastily) to support a [blog
+post](https://www.bryanshalloway.com/2020/02/24/animatrixr-visualizing-matrix-transformations-pt-2/)
+on exploring animating matrix transformations using `gganimate`. The
+blog post doubles as providing documentation on how `animatrixr` is
+set-up and some of its limitations.
+
+No work has gone into setting-up tests, catching errors, considering
+potential users, etc. Also, many visualizations you might try to make
+may look unintuitive (or simply come-out incorrect) – especially
+involving rotations when starting outside of unit vectors.
 
 ## Installation
 
-If you *still* want to check-it out, you can install it from from my
-github page:
+If you *still* want to check-it out, you can install it from my github
+page:
 
 ``` r
 devtools::install_github("brshallo/animatrixr")
