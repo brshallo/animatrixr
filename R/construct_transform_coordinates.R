@@ -76,3 +76,20 @@ transform_segment <- function(df, m){
     transform_df_coords(x, y, m = m) %>%
     transform_df_coords(xend, yend, m = m)
 }
+
+#' Scale Data Frame
+#'
+#' Helper function for adding coordinates onto animation of transformation.
+#'
+#' @param data Dataframe containing at least one numeric column.
+#' @param limit Maximum magnitude value in range of coordinates after scaling, defaults to 5.
+#'
+#' @return A dataframe that has been scaled so that the largest value in a numeric column is 5.
+#' @export
+#'
+#' @examples scale_data(tibble(x = 1:10, y = -1:-10))
+scale_data <- function(data, limit = 5){
+  max_magnitude <- max(abs(select(data, where(is.numeric))))
+  scale_factor <- limit / max_magnitude
+  mutate(data, across(where(is.numeric), ~.x * scale_factor))
+}

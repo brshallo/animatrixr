@@ -1,7 +1,7 @@
 Package: animatrixr
 Type: Package
 Title: Animates 2x2 matrix transformations
-Version: 0.0.0.9000
+Version: 0.0.1.9000
 Author: Bryan Shalloway
 Description: Toy package in support of my blog post on visualizing simple
     2x2 matrix transformations. Not meant for general use.
@@ -15,7 +15,8 @@ Imports:
     gganimate
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    datasauRus
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
 URL: https://github.com/brshallo/animatrixr

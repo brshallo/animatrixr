@@ -2,18 +2,25 @@
 #'
 #' @param transformations List of matrix transformations to apply (length will
 #'   determine total number of explicit frames in animation.)
-#' @param datasaurus Whether to add coordinates of the datasaurus.
-#' @param return_graph_objects Return the dataframe containing the objects that
-#'   would have gone into the animation.
-#' @param return_static Return the static ggplot graph.
+#' @param points_start Dataframe containing x and y columns of points that will
+#'   be plotted (if any coordinate is greater than magnitude 5, coordinates will
+#'   be automatically scaled down).
+#' @param return_graph_objects Logical indicating whether to return the
+#'   dataframe containing the objects that would have gone into the animation.
+#' @param return_static Logical indicating whether to return the static ggplot
+#'   graph.
+#' @param datasaurus Logical, where `TRUE` is equivalent to is equivalent to
+#'   setting `points_start = filter(datasauRus::datasaurus_dozen, dataset ==
+#'   "dino")`
 #'
 #' @return An animation created by `gganimate`.
 #' @export
 #'
 animate_matrix <-function(transformations,
-                          datasaurus = FALSE,
+                          points_start = NULL,
                           return_graph_objects = FALSE,
-                          return_static = FALSE){
+                          return_static = FALSE,
+                          datasaurus = FALSE){
 
   grid_start <- construct_grid() %>%
     mutate(id = row_number())
@@ -43,9 +50,19 @@ animate_matrix <-function(transformations,
     unnest(basis)
 
   if(datasaurus){
-    points_start <- datasauRus::datasaurus_dozen %>%
-      filter(dataset == "dino") %>%
-      transmute_if(is.numeric, `/`, 20) %>%
+    points_start <- filter(datasauRus::datasaurus_dozen, dataset == "dino")
+  }
+
+  if(!is.null(points_start)){
+
+    if(!all(c("x", "y") %in% colnames(points_start))) stop("'x' and 'y' columns must be in `points_start`")
+
+    if(5 <= max(abs(select(points_start, where(is.numeric))))){
+      points_start <- scale_data(points_start)
+      message("x, y coordinates of `points_start` scaled so that maximum magnitude is 5.")
+    }
+
+    points_start <- points_start %>%
       mutate(id = max(basis_start$id) + row_number())
 
     graph_objects <- graph_objects %>%
@@ -72,7 +89,7 @@ animate_matrix <-function(transformations,
           axis.title = element_blank(),
           legend.position = "none")
 
-  if(datasaurus) p <- p + geom_point(colour = "darkgreen", data = points_all)
+  if(!is.null(points_start)) p <- p + geom_point(colour = "darkgreen", size = 0.5, data = points_all)
 
   if(return_static) return(p)
 
