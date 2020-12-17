@@ -6,7 +6,7 @@
 `animatrixr` is a *toy* package that allows you to pipe together
 animations of matrix transformations. For example:
 
-(rotate) –\> (sheer) –\> (reflect) –\> *ANIMATE*
+(rotate) %\>% (sheer) %\>% (reflect) %\>% *ANIMATE*
 
 ``` r
 library(dplyr)
